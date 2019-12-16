@@ -107,7 +107,7 @@ void Matrix::plainPrint()
  * @param b the matrix we wish to assign
  * @return todo see if need to return anything
  */
-Matrix& Matrix::operator=(const Matrix &b)
+Matrix &Matrix::operator=(const Matrix &b)
 {
 	if (rows != b.rows || cols != b.cols)
 	{
@@ -127,14 +127,32 @@ Matrix& Matrix::operator=(const Matrix &b)
  * @param b the right hand side matrix.
  * @return the result of the multiplication.
  */
-Matrix Matrix::operator*(const Matrix &b) const;
+Matrix Matrix::operator*(const Matrix &b)
+{
+	Matrix res = Matrix(rows, b.cols);
+	res.matrix = (float *) malloc(sizeof(float) * rows * b.cols);
+	for (int i = 0; i < rows; ++i)
+	{
+		for (int j = 0; j < cols; ++j)
+		{
+			//todo
+		}
+	}
+	return res;
+}
 
 /**
  * multiplies the matrix by a scalar from the right side.
  * @param c the scalar by which we multiply the matrix.
  * @return the result of the multiplication.
  */
-Matrix Matrix::operator*(const int &c) const;
+Matrix Matrix::operator*(const float &c)
+{
+	for (int i = 0; i < rows * cols; ++i)
+	{
+		matrix[i] *= c;
+	}
+}
 
 
 /**

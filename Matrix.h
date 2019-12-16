@@ -37,19 +37,19 @@ public:
 	//Operators:
 	Matrix &operator=(const Matrix &b);
 
-	Matrix operator*(const Matrix &b) const;
+	Matrix operator*(const Matrix &b);
 
-	Matrix operator*(const int &c) const;
+	Matrix operator*(const float &c);
 
-	friend Matrix operator*(const int &c, const Matrix &a);
+	friend Matrix operator*(const float &c, const Matrix &a);
 
 	Matrix operator+(const Matrix &b) const;
 
 	Matrix &operator+=(const Matrix &b);
 
-	const int& operator()(int i, int j) const;// todo - return value should be & or not?? consts?
+	const float& operator()(int i, int j) const;// todo - return value should be & or not?? consts?
 
-	const int& operator[](int i) const;
+	const float& operator[](int i) const;
 
 	friend std::ostream &operator<<(std::ostream &out, const Matrix &matrix);
 
