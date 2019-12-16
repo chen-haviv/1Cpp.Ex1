@@ -20,15 +20,15 @@ public:
 
 	Matrix();
 
-	Matrix(Matrix &m);
+	Matrix(const Matrix &m);
 
 	// Destructor:
 	~Matrix();
 
 	// Methods:
-	int getRows();
+	const int& getRows();
 
-	int getCols();
+	const int& getCols();
 
 	void vectorize();
 
@@ -58,7 +58,7 @@ public:
 private:
 	int rows;
 	int cols;
-	int* matrix; // pointer to the single dimensional array which is our matrix
+	float* matrix; // pointer to the single dimensional array which is our matrix
 
 
 
