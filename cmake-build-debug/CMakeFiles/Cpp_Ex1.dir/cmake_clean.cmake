@@ -1,5 +1,7 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/Cpp_Ex1.dir/Matrix.cpp.o"
   "CMakeFiles/Cpp_Ex1.dir/main.cpp.o"
+  "CMakeFiles/Cpp_Ex1.dir/tmpmain.cpp.o"
   "Cpp_Ex1.exe"
   "Cpp_Ex1.pdb"
   "libCpp_Ex1.dll.a"
