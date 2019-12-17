@@ -136,7 +136,7 @@ Matrix &Matrix::operator=(const Matrix &b)
  */
 Matrix Matrix::operator*(const Matrix &b)
 {
-    for (int i = 0; i < rows; ++i)
+	for (int i = 0; i < rows; ++i)
 	{
 		for (int j = 0; j < cols; ++j)
 		{
@@ -152,10 +152,10 @@ Matrix Matrix::operator*(const Matrix &b)
  */
 Matrix Matrix::operator*(const float &c)
 {
-    Matrix res(rows, cols);
+	Matrix res(rows, cols);
 	for (int i = 0; i < rows * cols; ++i)
 	{
-		res[i] = matrix[i] * c;
+		res.matrix[i] = matrix[i] * c;
 	}
 	return res;
 }
@@ -167,12 +167,12 @@ Matrix Matrix::operator*(const float &c)
  * @param a the matrix.
  * @return the multiplication result.
  */
-Matrix operator*(const float &c, Matrix a)
+Matrix operator*(const float &c, const Matrix &a)
 {
-    Matrix res(rows, cols);
-    for (int i = 0; i < a.rows * a.cols; ++i)
+	Matrix res(a.rows, a.cols);
+	for (int i = 0; i < a.rows * a.cols; ++i)
 	{
-		res[i] = a.matrix[i] * c;
+		res.matrix[i] = a.matrix[i] * c;
 	}
 	return res;
 }
@@ -182,7 +182,7 @@ Matrix operator*(const float &c, Matrix a)
  * @param b the right hand side matrix we wish to add.
  * @return the addition result.
  */
-Matrix Matrix::operator+(const Matrix &b)
+Matrix Matrix::operator+(const Matrix &b) const
 {
 	if (rows != b.rows || cols != b.cols)
 	{
@@ -190,15 +190,15 @@ Matrix Matrix::operator+(const Matrix &b)
 	}
 	else
 	{
-        Matrix res(rows, cols); // todo ask the metargel
-        for (int i = 0; i < rows; ++i)
+		Matrix res(rows, cols);
+		for (int i = 0; i < rows; ++i)
 		{
 			for (int j = 0; j < cols; ++j)
 			{
-				res[i][j] = matrix[i * rows + j] + b.matrix[i * rows + j];
+				res.matrix[i * rows + j] = matrix[i * rows + j] + b.matrix[i * rows + j];
 			}
 		}
-		return *res;
+		return res;
 	}
 }
 
@@ -209,7 +209,8 @@ Matrix Matrix::operator+(const Matrix &b)
  * @return makes the left hand side matrix the sum of the previous left hand side and the matrix
  * given as an argument.
  */
-Matrix &Matrix::operator+=(const Matrix &b){
+Matrix &Matrix::operator+=(const Matrix &b)
+{
 	if (rows != b.rows || cols != b.cols)
 	{
 		std::cerr << ERROR_MSG << ADDITION_ERROR_MSG << std::endl;
@@ -220,60 +221,65 @@ Matrix &Matrix::operator+=(const Matrix &b){
 		{
 			for (int j = 0; j < cols; ++j)
 			{
-				matrix[i * rows + j] += + b.matrix[i * rows + j];
+				matrix[i * rows + j] += +b.matrix[i * rows + j];
 			}
 		}
 		return *this;
 	}
 }
 
-float& Matrix::operator()(int i, int j)
+/**
+ * access matrix coordinates using (i,j) notation, works on non const objects.
+ * @param i
+ * @param j
+ * @return
+ */
+float &Matrix::operator()(int i, int j)
 {
-    return matrix[i * rows + j];
+	return matrix[i * rows + j];
 }
 
 
-
 /**
- * parenthesis indexing, returns the matrix coordinate in position (i,j).
+ * parenthesis indexing, returns the matrix coordinate in position (i,j). works on const objects.
  * @param i the row number.
  * @param j the col number.
  * @return the number found in the i'th row and j'th column.
  */
-const float& Matrix::operator()(int i, int j) const// todo - return value should be & or not??
+const float &Matrix::operator()(int i, int j) const
 // consts?
 {
 	return matrix[i * rows + j];
 }
 
 
-/** direct access to the matrix array
+/** direct access to the matrix array, non const.
  * @param i the i'th element in the matrix array.
  * @return the value of the i'th element.
  */
-float& Matrix::operator[](int i) // todo see if this is what the poet meant
+float &Matrix::operator[](int i)
 {
 	return matrix[i];
 }
 
-/** direct access to the matrix array
+/** direct access to the matrix array, works on const matrices.
  * @param i the i'th element in the matrix array.
  * @return the value of the i'th element.
  */
-const float& Matrix::operator[](int i) const // todo see if this is what the poet meant
+const float &Matrix::operator[](int i) const
 {
 	return matrix[i];
 }
 
 /**
- *
+ * todo
  * @param out
  * @param matrix
  * @return
  */
-friend std::ostream &Matrix::operator<<(std::ostream &out, const Matrix &matrix);
+std::ostream &operator<<(std::ostream &out, const Matrix &m)
 {
-
+	return out;
 }
 
 
@@ -283,5 +289,24 @@ friend std::ostream &Matrix::operator<<(std::ostream &out, const Matrix &matrix)
  * @param matrix
  * @return
  */
-friend std::istream &Matrix::operator>>(std::istream &in, Matrix &matrix);
+std::istream &operator>>(std::istream &in, Matrix &m)
+{
+	float num = 0;
+	int i = 0;
+	while (in >> num)
+	{
+		m.matrix[i] = num;
+		++i;
+	}
+	if (i != m.rows * m.cols) // if dimensions don't match our expectations.
+	{
+		std::cerr << ERROR_MSG << INCOMPATIBLE_FILE_TO_MATRIX << std::endl;
+	}
+	else if (in.bad() || in.fail()) // if input file contains non float data
+	{
+		std::cerr << ERROR_MSG << INVALID_INPUT << std::endl;
+	}
+	return in; // return the input stream as is because we might want to do something with it.
+	// todo ask if this is okay.
+}
 
