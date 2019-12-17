@@ -5,6 +5,10 @@
 #define ADDITION_ERROR_MSG "Incompatible rows and columns in addition"
 #define INCOMPATIBLE_FILE_TO_MATRIX "Number of numbers read does not match expected matrix size."
 #define INVALID_INPUT "Invalid input from input file."
+#define ERROR_INCOMPATIBLE_MATRIX_MULTIPLICATION "Incompatible matrices in multiplication attempt."
+#define IMG_PROCESSED_MSG "Image processed:"
+#define MLP_RESULT_MSG "Mlp result: "
+#define PROBABILITY_MSG " at probability: "
 /**
  * @struct MatrixDims
  * @brief Matrix dimensions container todo what is this???
@@ -16,6 +20,11 @@ typedef struct MatrixDims
 
 class Matrix
 {
+private:
+	int rows;
+	int cols;
+	float *matrix; // pointer to the single dimensional array which is our matrix
+
 
 public:
 	// Constructors:
@@ -60,11 +69,6 @@ public:
 	friend std::ostream &operator<<(std::ostream &out, const Matrix &m);
 
 	friend std::istream &operator>>(std::istream &in, Matrix &matrix);
-
-private:
-	int rows;
-	int cols;
-	float *matrix; // pointer to the single dimensional array which is our matrix
 
 
 

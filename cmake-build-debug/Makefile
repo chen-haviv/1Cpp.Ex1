@@ -123,6 +123,33 @@ Cpp_Ex1/fast:
 	$(MAKE) -f CMakeFiles/Cpp_Ex1.dir/build.make CMakeFiles/Cpp_Ex1.dir/build
 .PHONY : Cpp_Ex1/fast
 
+Activation.o: Activation.cpp.o
+
+.PHONY : Activation.o
+
+# target to build an object file
+Activation.cpp.o:
+	$(MAKE) -f CMakeFiles/Cpp_Ex1.dir/build.make CMakeFiles/Cpp_Ex1.dir/Activation.cpp.o
+.PHONY : Activation.cpp.o
+
+Activation.i: Activation.cpp.i
+
+.PHONY : Activation.i
+
+# target to preprocess a source file
+Activation.cpp.i:
+	$(MAKE) -f CMakeFiles/Cpp_Ex1.dir/build.make CMakeFiles/Cpp_Ex1.dir/Activation.cpp.i
+.PHONY : Activation.cpp.i
+
+Activation.s: Activation.cpp.s
+
+.PHONY : Activation.s
+
+# target to generate assembly for a file
+Activation.cpp.s:
+	$(MAKE) -f CMakeFiles/Cpp_Ex1.dir/build.make CMakeFiles/Cpp_Ex1.dir/Activation.cpp.s
+.PHONY : Activation.cpp.s
+
 Matrix.o: Matrix.cpp.o
 
 .PHONY : Matrix.o
@@ -213,6 +240,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... Cpp_Ex1"
 	@echo "... edit_cache"
+	@echo "... Activation.o"
+	@echo "... Activation.i"
+	@echo "... Activation.s"
 	@echo "... Matrix.o"
 	@echo "... Matrix.i"
 	@echo "... Matrix.s"

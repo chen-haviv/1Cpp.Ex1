@@ -136,11 +136,23 @@ Matrix &Matrix::operator=(const Matrix &b)
  */
 Matrix Matrix::operator*(const Matrix &b)
 {
-	for (int i = 0; i < rows; ++i)
+	if (cols != b.rows)
 	{
-		for (int j = 0; j < cols; ++j)
+		std::cerr << ERROR_MSG << ERROR_INCOMPATIBLE_MATRIX_MULTIPLICATION << std::endl;
+		exit(1);
+	}
+	else
+	{
+		Matrix result(rows, b.cols);
+		for (int i = 0; i < rows; ++i)
 		{
-			matrix[i]; // todo
+			for (int j = 0; j < b.cols; ++j)
+			{
+				for (int k = 0; k < cols; ++k)
+				{
+					result[i * rows + j] += matrix[i * rows + k] + b.matrix[k * b.rows + j];
+				}
+			}
 		}
 	}
 }
@@ -187,6 +199,8 @@ Matrix Matrix::operator+(const Matrix &b) const
 	if (rows != b.rows || cols != b.cols)
 	{
 		std::cerr << ERROR_MSG << ADDITION_ERROR_MSG << std::endl;
+		exit(1);
+
 	}
 	else
 	{
@@ -214,6 +228,7 @@ Matrix &Matrix::operator+=(const Matrix &b)
 	if (rows != b.rows || cols != b.cols)
 	{
 		std::cerr << ERROR_MSG << ADDITION_ERROR_MSG << std::endl;
+		exit(1);
 	}
 	else
 	{
@@ -272,41 +287,64 @@ const float &Matrix::operator[](int i) const
 }
 
 /**
- * todo
+ *
  * @param out
  * @param matrix
  * @return
  */
 std::ostream &operator<<(std::ostream &out, const Matrix &m)
 {
+	std::cout << IMG_PROCESSED_MSG << std::endl;
+	for (int i = 0; i < m.rows; ++i)
+	{
+		for (int j = 0; j < m.cols; ++j)
+		{
+			if (m(i, j) <=0.1)
+			{
+				std::cout << "  ";
+			}
+			else
+			{
+				std::cout << "**";
+			}
+		}
+		std::cout << std::endl;
+	}
+	std::cout << std::endl;
+	std::cout << MLP_RESULT_MSG << res << PROBABILITY_MSG << prob << std::endl; // todo
 	return out;
 }
 
 
 /**
- *
- * @param in
- * @param matrix
- * @return
+ * reads from the given input stream into our matrix. todo need to see if i
+ * @param in the input stream, ideally a file opened with binary flag (binary file)
+ * @param matrix the matrix which we read into
+ * @return the input stream after it had finished reading.
  */
 std::istream &operator>>(std::istream &in, Matrix &m)
 {
 	float num = 0;
 	int i = 0;
-	while (in >> num)
-	{
-		m.matrix[i] = num;
-		++i;
-	}
-	if (i != m.rows * m.cols) // if dimensions don't match our expectations.
+	in.seekg (0, in.end);
+	int length = in.tellg(); // goes to end of file to discover size, to ensure that compatible
+	// with the matrix into which we write from the file
+	in.seekg(0, in.beg);
+	if (length != m.rows * m.cols)
 	{
 		std::cerr << ERROR_MSG << INCOMPATIBLE_FILE_TO_MATRIX << std::endl;
+		exit(1);
+
 	}
-	else if (in.bad() || in.fail()) // if input file contains non float data
+	while (!in.eof())
+	{
+		in.read((char *) m.matrix, length); // todo see if this is a good way to read a file
+	}
+	if (in.bad() || in.fail()) // if input file contains non float data
 	{
 		std::cerr << ERROR_MSG << INVALID_INPUT << std::endl;
+		exit(1);
 	}
 	return in; // return the input stream as is because we might want to do something with it.
-	// todo ask if this is okay.
 }
 

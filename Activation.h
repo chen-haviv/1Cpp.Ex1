@@ -12,6 +12,16 @@ enum ActivationType
     Softmax
 };
 
-// Insert Activation class here...
+class Activation{
+private:
+	ActivationType type;
+
+public:
+	Activation (ActivationType actType);
+
+	const ActivationType& geetActivationType();
+
+	const float&operator()(std::istream& in);
+};
 
 #endif //ACTIVATION_H
