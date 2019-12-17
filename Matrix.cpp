@@ -55,6 +55,7 @@ Matrix::Matrix(const Matrix &m) : Matrix(m.rows, m.cols)
 Matrix::~Matrix()
 {
 	delete[] matrix;
+	delete this; // todo is this necessary?
 }
 
 // Methods:
