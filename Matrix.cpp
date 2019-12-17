@@ -16,10 +16,10 @@
  */
 Matrix::Matrix(int rows, int cols) : rows(rows), cols(cols)
 {
-	matrix = (float *) malloc(sizeof(float) * rows * cols);
+	matrix = new float[rows * cols];
 	for (int i = 0; i < rows * cols; i++)
 	{
-		i = 0;
+		matrix[i] = 0;
 	}
 }
 
@@ -28,7 +28,7 @@ Matrix::Matrix(int rows, int cols) : rows(rows), cols(cols)
  */
 Matrix::Matrix() : Matrix(1, 1)
 {
-	matrix = (float *) malloc(sizeof(float));
+	matrix = new float[1];
 	matrix[0] = 0;
 }
 
@@ -39,7 +39,8 @@ Matrix::Matrix() : Matrix(1, 1)
  */
 Matrix::Matrix(const Matrix &m) : Matrix(m.rows, m.cols)
 {
-	for (int i = 0; i < rows * cols; i++)
+	matrix = new float[rows * cols];
+	for (int i = 0; i < rows * cols; ++i)
 	{
 		matrix[i] = m.matrix[i];
 	}
@@ -53,8 +54,7 @@ Matrix::Matrix(const Matrix &m) : Matrix(m.rows, m.cols)
  */
 Matrix::~Matrix()
 {
-	free(matrix);
-	// free(this); // todo is this necessary?
+	delete[] matrix;
 }
 
 // Methods:
@@ -95,9 +95,13 @@ void Matrix::plainPrint()
 	{
 		for (int j = 0; j < cols; ++j)
 		{
-			std::cout << matrix[i * rows + j] << " ";
+			std::cout << matrix[i * rows + j];
+			if (j != cols - 1)
+			{
+				std::cout << " "; // prints space between each coordinate
+			}
 		}
-		std::cout << std::endl;
+		std::cout << std::endl; // prints endl after end of each row
 	}
 }
 
@@ -109,17 +113,19 @@ void Matrix::plainPrint()
  */
 Matrix &Matrix::operator=(const Matrix &b)
 {
-	if (rows != b.rows || cols != b.cols)
+	if (this == &b)
 	{
-		std::cerr << ERROR_MSG << ASSIGNMENT_ERROR_MSG << std::endl;
+		return *this;
 	}
-	else
+	rows = b.rows;
+	cols = b.cols;
+	delete[] matrix;
+	matrix = new float[b.rows * b.cols];
+	for (int i = 0; i < rows * cols; ++i)
 	{
-		for (int i = 0; i < rows * cols; i++)
-		{
-			matrix[i] = b.matrix[i];
-		}
+		matrix[i] = b.matrix[i];
 	}
+	return *this;
 }
 
 /**
@@ -129,16 +135,13 @@ Matrix &Matrix::operator=(const Matrix &b)
  */
 Matrix Matrix::operator*(const Matrix &b)
 {
-	Matrix res = Matrix(rows, b.cols);
-	res.matrix = (float *) malloc(sizeof(float) * rows * b.cols);
 	for (int i = 0; i < rows; ++i)
 	{
 		for (int j = 0; j < cols; ++j)
 		{
-			//todo
+			matrix[i]; // todo
 		}
 	}
-	return res;
 }
 
 /**
@@ -150,8 +153,9 @@ Matrix Matrix::operator*(const float &c)
 {
 	for (int i = 0; i < rows * cols; ++i)
 	{
-		matrix[i] *= c;
+		matrix[i] = matrix[i] * c;
 	}
+	return *this; // todo is this what the poet meant? does this change the valus of this? (No?)
 }
 
 
@@ -161,14 +165,38 @@ Matrix Matrix::operator*(const float &c)
  * @param a the matrix.
  * @return the multiplication result.
  */
-friend Matrix Matrix::operator*(const int &c, const Matrix &a);
+Matrix operator*(const float &c, Matrix a)
+{
+	for (int i = 0; i < a.rows * a.cols; ++i)
+	{
+		a.matrix[i] *= c;
+	}
+	return a;
+}
 
 /**
  * matrix addition as defined in the pdf.
  * @param b the right hand side matrix we wish to add.
  * @return the addition result.
  */
-Matrix Matrix::operator+(const Matrix &b) const;
+Matrix Matrix::operator+(const Matrix &b)
+{
+	if (rows != b.rows || cols != b.cols)
+	{
+		std::cerr << ERROR_MSG << ADDITION_ERROR_MSG << std::endl;
+	}
+	else
+	{
+		for (int i = 0; i < rows; ++i)
+		{
+			for (int j = 0; j < cols; ++j)
+			{
+				matrix[i * rows + j] = matrix[i * rows + j] + b.matrix[i * rows + j];
+			}
+		}
+		return *this;
+	}
+}
 
 /**
  * adds the given b matrix to the a matrix on the left hand side of the expression and assigns
@@ -177,7 +205,23 @@ Matrix Matrix::operator+(const Matrix &b) const;
  * @return makes the left hand side matrix the sum of the previous left hand side and the matrix
  * given as an argument.
  */
-Matrix &Matrix::operator+=(const Matrix &b);
+Matrix &Matrix::operator+=(const Matrix &b){
+	if (rows != b.rows || cols != b.cols)
+	{
+		std::cerr << ERROR_MSG << ADDITION_ERROR_MSG << std::endl;
+	}
+	else
+	{
+		for (int i = 0; i < rows; ++i)
+		{
+			for (int j = 0; j < cols; ++j)
+			{
+				matrix[i * rows + j] += + b.matrix[i * rows + j];
+			}
+		}
+		return *this;
+	}
+}
 
 /**
  * parenthesis indexing, returns the matrix coordinate in position (i,j).
@@ -185,7 +229,7 @@ Matrix &Matrix::operator+=(const Matrix &b);
  * @param j the col number.
  * @return the number found in the i'th row and j'th column.
  */
-const float &Matrix::operator()(int i, int j) const// todo - return value should be & or not??
+float Matrix::operator()(int i, int j) const// todo - return value should be & or not??
 // consts?
 {
 	return matrix[i * rows + j];
@@ -196,7 +240,7 @@ const float &Matrix::operator()(int i, int j) const// todo - return value should
  * @param i the i'th element in the matrix array.
  * @return the value of the i'th element.
  */
-const float &Matrix::operator[](int i) const // todo see if this is what the poet meant
+float Matrix::operator[](int i) const // todo see if this is what the poet meant
 {
 	return matrix[i];
 }
@@ -208,6 +252,10 @@ const float &Matrix::operator[](int i) const // todo see if this is what the poe
  * @return
  */
 friend std::ostream &Matrix::operator<<(std::ostream &out, const Matrix &matrix);
+{
+
+}
+
 
 /**
  *
