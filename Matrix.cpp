@@ -150,14 +150,14 @@ Matrix Matrix::operator*(const Matrix &b)
  * @param c the scalar by which we multiply the matrix.
  * @return the result of the multiplication.
  */
-Matrix& Matrix::operator*(const float &c)
+Matrix Matrix::operator*(const float &c)
 {
-    Matrix res = new Matrix(rows, cols);
+    Matrix res(rows, cols);
 	for (int i = 0; i < rows * cols; ++i)
 	{
 		res[i] = matrix[i] * c;
 	}
-	return *this;
+	return res;
 }
 
 
@@ -167,14 +167,14 @@ Matrix& Matrix::operator*(const float &c)
  * @param a the matrix.
  * @return the multiplication result.
  */
-Matrix& operator*(const float &c, Matrix a)
+Matrix operator*(const float &c, Matrix a)
 {
-    Matrix res = new Matrix(rows, cols);
+    Matrix res(rows, cols);
     for (int i = 0; i < a.rows * a.cols; ++i)
 	{
 		res[i] = a.matrix[i] * c;
 	}
-	return *res;
+	return res;
 }
 
 /**
@@ -182,7 +182,7 @@ Matrix& operator*(const float &c, Matrix a)
  * @param b the right hand side matrix we wish to add.
  * @return the addition result.
  */
-Matrix& Matrix::operator+(const Matrix &b)
+Matrix Matrix::operator+(const Matrix &b)
 {
 	if (rows != b.rows || cols != b.cols)
 	{
@@ -190,7 +190,7 @@ Matrix& Matrix::operator+(const Matrix &b)
 	}
 	else
 	{
-        Matrix res = new Matrix(rows, cols); // todo ask the metargel
+        Matrix res(rows, cols); // todo ask the metargel
         for (int i = 0; i < rows; ++i)
 		{
 			for (int j = 0; j < cols; ++j)
