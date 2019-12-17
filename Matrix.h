@@ -44,13 +44,15 @@ public:
 
 	friend Matrix operator*(const float &c, Matrix a);
 
-	Matrix operator+(const Matrix &b);
+	Matrix operator+(const Matrix &b) const;
 
 	Matrix &operator+=(const Matrix &b);
 
-	float operator()(int i, int j) const;// todo - return value should be & or not?? consts?
+	const float& operator()(int i, int j) const;// todo - return value should be & or not?? consts?
+	float& operator()(int i, int j);// todo - return value should be & or not?? consts?
 
-	float operator[](int i) const;
+	float operator[](int i);
+	const float& operator[](int i) const;
 
 	friend std::ostream &operator<<(std::ostream &out, const Matrix &matrix);
 

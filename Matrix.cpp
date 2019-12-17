@@ -110,7 +110,7 @@ void Matrix::plainPrint()
 /**
  * assigns all values of a given matrix to the matrix on the left hand side of the expression.
  * @param b the matrix we wish to assign
- * @return todo see if need to return anything
+ * @return the object after deep copying
  */
 Matrix &Matrix::operator=(const Matrix &b)
 {
@@ -136,7 +136,7 @@ Matrix &Matrix::operator=(const Matrix &b)
  */
 Matrix Matrix::operator*(const Matrix &b)
 {
-	for (int i = 0; i < rows; ++i)
+    for (int i = 0; i < rows; ++i)
 	{
 		for (int j = 0; j < cols; ++j)
 		{
@@ -150,13 +150,14 @@ Matrix Matrix::operator*(const Matrix &b)
  * @param c the scalar by which we multiply the matrix.
  * @return the result of the multiplication.
  */
-Matrix Matrix::operator*(const float &c)
+Matrix& Matrix::operator*(const float &c)
 {
+    Matrix res = new Matrix(rows, cols);
 	for (int i = 0; i < rows * cols; ++i)
 	{
-		matrix[i] = matrix[i] * c;
+		res[i] = matrix[i] * c;
 	}
-	return *this; // todo is this what the poet meant? does this change the valus of this? (No?)
+	return *this;
 }
 
 
@@ -166,13 +167,14 @@ Matrix Matrix::operator*(const float &c)
  * @param a the matrix.
  * @return the multiplication result.
  */
-Matrix operator*(const float &c, Matrix a)
+Matrix& operator*(const float &c, Matrix a)
 {
-	for (int i = 0; i < a.rows * a.cols; ++i)
+    Matrix res = new Matrix(rows, cols);
+    for (int i = 0; i < a.rows * a.cols; ++i)
 	{
-		a.matrix[i] *= c;
+		res[i] = a.matrix[i] * c;
 	}
-	return a;
+	return *res;
 }
 
 /**
@@ -180,7 +182,7 @@ Matrix operator*(const float &c, Matrix a)
  * @param b the right hand side matrix we wish to add.
  * @return the addition result.
  */
-Matrix Matrix::operator+(const Matrix &b)
+Matrix& Matrix::operator+(const Matrix &b)
 {
 	if (rows != b.rows || cols != b.cols)
 	{
@@ -188,14 +190,15 @@ Matrix Matrix::operator+(const Matrix &b)
 	}
 	else
 	{
-		for (int i = 0; i < rows; ++i)
+        Matrix res = new Matrix(rows, cols); // todo ask the metargel
+        for (int i = 0; i < rows; ++i)
 		{
 			for (int j = 0; j < cols; ++j)
 			{
-				matrix[i * rows + j] = matrix[i * rows + j] + b.matrix[i * rows + j];
+				res[i][j] = matrix[i * rows + j] + b.matrix[i * rows + j];
 			}
 		}
-		return *this;
+		return *res;
 	}
 }
 
@@ -224,13 +227,20 @@ Matrix &Matrix::operator+=(const Matrix &b){
 	}
 }
 
+float& Matrix::operator()(int i, int j)
+{
+    return matrix[i * rows + j];
+}
+
+
+
 /**
  * parenthesis indexing, returns the matrix coordinate in position (i,j).
  * @param i the row number.
  * @param j the col number.
  * @return the number found in the i'th row and j'th column.
  */
-float Matrix::operator()(int i, int j) const// todo - return value should be & or not??
+const float& Matrix::operator()(int i, int j) const// todo - return value should be & or not??
 // consts?
 {
 	return matrix[i * rows + j];
@@ -241,7 +251,16 @@ float Matrix::operator()(int i, int j) const// todo - return value should be & o
  * @param i the i'th element in the matrix array.
  * @return the value of the i'th element.
  */
-float Matrix::operator[](int i) const // todo see if this is what the poet meant
+float& Matrix::operator[](int i) // todo see if this is what the poet meant
+{
+	return matrix[i];
+}
+
+/** direct access to the matrix array
+ * @param i the i'th element in the matrix array.
+ * @return the value of the i'th element.
+ */
+const float& Matrix::operator[](int i) const // todo see if this is what the poet meant
 {
 	return matrix[i];
 }
