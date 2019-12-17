@@ -42,7 +42,7 @@ public:
 
 	const int &getCols();
 
-	void vectorize();
+	Matrix& vectorize();
 
 	void plainPrint();
 

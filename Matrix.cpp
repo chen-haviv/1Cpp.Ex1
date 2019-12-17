@@ -80,10 +80,11 @@ const int &Matrix::getCols()
 /**
  * turns a matrix into a vector by making the rows the size of rows*cols and cols = 1
  */
-void Matrix::vectorize()
+Matrix& Matrix::vectorize()
 {
 	rows = rows * cols;
 	cols = 1;
+	return *this;
 }
 
 /**
@@ -317,7 +318,12 @@ std::ostream &operator<<(std::ostream &out, const Matrix &m)
 
 
 /**
- * reads from the given input stream into our matrix. todo need to see if i
+ * reads from the given input stream into our matrix.
+ * assumes that the matrix field of m is empty! does not delete it if it has been previously
+ * assigned!!!
+ * discovers the size of the file, then checks to see if it's size is compatible with the
+ * dimensions of the matrix, if not returns an error. if compatible, it reads the input file into
+ * the given m.matrix array.
  * @param in the input stream, ideally a file opened with binary flag (binary file)
  * @param matrix the matrix which we read into
  * @return the input stream after it had finished reading.
@@ -330,20 +336,17 @@ std::istream &operator>>(std::istream &in, Matrix &m)
 	int length = in.tellg(); // goes to end of file to discover size, to ensure that compatible
 	// with the matrix into which we write from the file
 	in.seekg(0, in.beg);
-	if (length != m.rows * m.cols)
+	if (length != m.rows * m.cols * sizeof(float)) // size should match matrix dimensions * float
 	{
 		std::cerr << ERROR_MSG << INCOMPATIBLE_FILE_TO_MATRIX << std::endl;
 		exit(1);
 
 	}
-	while (!in.eof())
-	{
-		in.read((char *) m.matrix, length); // todo see if this is a good way to read a file
-	}
+	in.read((char *) m.matrix, length); // todo see if this is a good way to read a file
 	if (in.bad() || in.fail()) // if input file contains non float data
 	{
 		std::cerr << ERROR_MSG << INVALID_INPUT << std::endl;
-		exit(1);
+		exit(1); // if something was wrong with reading from the file.
 	}
 	return in; // return the input stream as is because we might want to do something with it.
 }
