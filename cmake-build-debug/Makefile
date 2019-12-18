@@ -150,6 +150,33 @@ Activation.cpp.s:
 	$(MAKE) -f CMakeFiles/Cpp_Ex1.dir/build.make CMakeFiles/Cpp_Ex1.dir/Activation.cpp.s
 .PHONY : Activation.cpp.s
 
+DenseLayer.o: DenseLayer.cpp.o
+
+.PHONY : DenseLayer.o
+
+# target to build an object file
+DenseLayer.cpp.o:
+	$(MAKE) -f CMakeFiles/Cpp_Ex1.dir/build.make CMakeFiles/Cpp_Ex1.dir/DenseLayer.cpp.o
+.PHONY : DenseLayer.cpp.o
+
+DenseLayer.i: DenseLayer.cpp.i
+
+.PHONY : DenseLayer.i
+
+# target to preprocess a source file
+DenseLayer.cpp.i:
+	$(MAKE) -f CMakeFiles/Cpp_Ex1.dir/build.make CMakeFiles/Cpp_Ex1.dir/DenseLayer.cpp.i
+.PHONY : DenseLayer.cpp.i
+
+DenseLayer.s: DenseLayer.cpp.s
+
+.PHONY : DenseLayer.s
+
+# target to generate assembly for a file
+DenseLayer.cpp.s:
+	$(MAKE) -f CMakeFiles/Cpp_Ex1.dir/build.make CMakeFiles/Cpp_Ex1.dir/DenseLayer.cpp.s
+.PHONY : DenseLayer.cpp.s
+
 Matrix.o: Matrix.cpp.o
 
 .PHONY : Matrix.o
@@ -243,6 +270,9 @@ help:
 	@echo "... Activation.o"
 	@echo "... Activation.i"
 	@echo "... Activation.s"
+	@echo "... DenseLayer.o"
+	@echo "... DenseLayer.i"
+	@echo "... DenseLayer.s"
 	@echo "... Matrix.o"
 	@echo "... Matrix.i"
 	@echo "... Matrix.s"

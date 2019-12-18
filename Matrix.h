@@ -38,11 +38,11 @@ public:
 	~Matrix();
 
 	// Methods:
-	const int &getRows();
+	const int &getRows() const;
 
-	const int &getCols();
+	const int &getCols() const;
 
-	Matrix& vectorize();
+	Matrix &vectorize();
 
 	void plainPrint();
 
@@ -59,8 +59,9 @@ public:
 
 	Matrix &operator+=(const Matrix &b);
 
-	const float &operator()(int i, int j) const;// todo - return value should be & or not?? consts?
 	float &operator()(int i, int j);// todo - return value should be & or not?? consts?
+
+	const float &operator()(int i, int j) const;// todo - return value should be & or not?? consts?
 
 	float &operator[](int i);
 

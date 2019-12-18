@@ -1,6 +1,8 @@
 //Activation.h
 #ifndef ACTIVATION_H
 #define ACTIVATION_H
+#include "Matrix.h"
+
 
 /**
  * @enum ActivationType
@@ -15,13 +17,21 @@ enum ActivationType
 class Activation{
 private:
 	ActivationType type;
+	static Matrix rectify(const Matrix &matrix, Matrix &postActivation) ;
+	static Matrix softmaximize(const Matrix &matrix, Matrix &postActivation) ;
+
+	~Activation();
 
 public:
-	Activation (ActivationType actType);
+	explicit Activation (ActivationType actType);
 
-	const ActivationType& geetActivationType();
+	const ActivationType& getActivationType();
 
-	const float&operator()(std::istream& in);
+	Matrix operator()(const Matrix &m);
+
+
+
+
 };
 
 #endif //ACTIVATION_H

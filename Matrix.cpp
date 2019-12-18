@@ -63,7 +63,7 @@ Matrix::~Matrix()
  *
  * @return the rows of a given matrix
  */
-const int &Matrix::getRows()
+const int &Matrix::getRows() const
 {
 	return rows;
 }
@@ -72,7 +72,7 @@ const int &Matrix::getRows()
  *
  * @return the cols of a given matrix
  */
-const int &Matrix::getCols()
+const int &Matrix::getCols() const
 {
 	return cols;
 }
@@ -80,7 +80,7 @@ const int &Matrix::getCols()
 /**
  * turns a matrix into a vector by making the rows the size of rows*cols and cols = 1
  */
-Matrix& Matrix::vectorize()
+Matrix &Matrix::vectorize()
 {
 	rows = rows * cols;
 	cols = 1;
@@ -300,7 +300,7 @@ std::ostream &operator<<(std::ostream &out, const Matrix &m)
 	{
 		for (int j = 0; j < m.cols; ++j)
 		{
-			if (m(i, j) <=0.1)
+			if (m(i, j) <= 0.1)
 			{
 				std::cout << "  ";
 			}
@@ -331,8 +331,7 @@ std::ostream &operator<<(std::ostream &out, const Matrix &m)
 std::istream &operator>>(std::istream &in, Matrix &m)
 {
 	float num = 0;
-	int i = 0;
-	in.seekg (0, in.end);
+	in.seekg(0, in.end);
 	int length = in.tellg(); // goes to end of file to discover size, to ensure that compatible
 	// with the matrix into which we write from the file
 	in.seekg(0, in.beg);
@@ -342,7 +341,13 @@ std::istream &operator>>(std::istream &in, Matrix &m)
 		exit(1);
 
 	}
-	in.read((char *) m.matrix, length); // todo see if this is a good way to read a file
+	float tempNum = 0;
+	int i = 0;
+	while (in.read(reinterpret_cast<char *>(&tempNum), sizeof(float))) // todo open file in binary
+	{
+		m.matrix[i] = tempNum;
+	}
+	// todo see if this is a good way to read a file
 	if (in.bad() || in.fail()) // if input file contains non float data
 	{
 		std::cerr << ERROR_MSG << INVALID_INPUT << std::endl;

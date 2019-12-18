@@ -3,4 +3,4 @@ project(Cpp_Ex1)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(Cpp_Ex1 main.cpp tmpmain.cpp Matrix.cpp Activation.cpp)
+add_executable(Cpp_Ex1 main.cpp tmpmain.cpp Matrix.cpp Activation.cpp DenseLayer.cpp DenseLayer.h)
