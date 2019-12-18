@@ -12,7 +12,7 @@
 class DenseLayer
 {
 public:
-	DenseLayer(const Matrix &w, const Matrix &bias, Activation activation);
+	DenseLayer(const Matrix &w, const Matrix &bias, ActivationType activation);
 
 	const Matrix& getWeights() const;
 
@@ -24,6 +24,9 @@ public:
 	}
 
 	~DenseLayer();
+
+	Matrix operator()(Matrix& matrix) const;
+
 
 
 

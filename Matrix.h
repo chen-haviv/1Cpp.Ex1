@@ -49,9 +49,9 @@ public:
 	//Operators:
 	Matrix &operator=(const Matrix &b);
 
-	Matrix operator*(const Matrix &b);
+	Matrix operator*(const Matrix &b) const;
 
-	Matrix operator*(const float &c);
+	Matrix operator*(const float &c) const;
 
 	friend Matrix operator*(const float &c, const Matrix &a);
 

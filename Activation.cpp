@@ -14,7 +14,7 @@ Activation::Activation(ActivationType actType) : type(actType)
  * todo see if I need to free recources here - if I need to use matrix argument later on in the
  * programme
  */
-Matrix Activation::operator()(const Matrix &matrix)
+Matrix Activation::operator()(const Matrix &matrix) const
 {
 	Matrix postActivation(matrix.getRows(), matrix.getCols());
 	if (type == Relu)

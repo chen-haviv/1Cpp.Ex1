@@ -135,7 +135,7 @@ Matrix &Matrix::operator=(const Matrix &b)
  * @param b the right hand side matrix.
  * @return the result of the multiplication.
  */
-Matrix Matrix::operator*(const Matrix &b)
+Matrix Matrix::operator*(const Matrix &b) const
 {
 	if (cols != b.rows)
 	{
@@ -163,7 +163,7 @@ Matrix Matrix::operator*(const Matrix &b)
  * @param c the scalar by which we multiply the matrix.
  * @return the result of the multiplication.
  */
-Matrix Matrix::operator*(const float &c)
+Matrix Matrix::operator*(const float &c) const
 {
 	Matrix res(rows, cols);
 	for (int i = 0; i < rows * cols; ++i)

@@ -2,6 +2,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/Cpp_Ex1.dir/Activation.cpp.o"
   "CMakeFiles/Cpp_Ex1.dir/DenseLayer.cpp.o"
   "CMakeFiles/Cpp_Ex1.dir/Matrix.cpp.o"
+  "CMakeFiles/Cpp_Ex1.dir/MlpNetwork.cpp.o"
   "CMakeFiles/Cpp_Ex1.dir/main.cpp.o"
   "CMakeFiles/Cpp_Ex1.dir/tmpmain.cpp.o"
   "Cpp_Ex1.exe"

@@ -27,7 +27,7 @@ public:
 
 	const ActivationType& getActivationType();
 
-	Matrix operator()(const Matrix &m);
+	Matrix operator()(const Matrix &m) const;
 
 
 
