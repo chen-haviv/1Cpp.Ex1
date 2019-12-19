@@ -12,7 +12,7 @@
 #define PROBABILITY_MSG " at probability: "
 /**
  * @struct MatrixDims
- * @brief Matrix dimensions container todo what is this???
+ * @brief Matrix dimensions container
  */
 typedef struct MatrixDims
 {
@@ -60,9 +60,9 @@ public:
 
 	Matrix &operator+=(const Matrix &b);
 
-	float &operator()(int i, int j);// todo - return value should be & or not?? consts?
+	float &operator()(int i, int j);
 
-	const float& operator()(int i, int j) const;// todo - return value should be & or not?? consts?
+	const float& operator()(int i, int j) const;
 
 	float &operator[](int i);
 

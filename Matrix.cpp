@@ -325,11 +325,10 @@ std::ostream &operator<<(std::ostream &out, const Matrix &m)
  */
 std::istream &operator>>(std::istream &in, Matrix &m)
 {
-	float num = 0;
-	in.seekg(0, in.end);
+	in.seekg(0, std::istream::end);
 	int length = in.tellg(); // goes to end of file to discover size, to ensure that compatible
 	// with the matrix into which we write from the file
-	in.seekg(0, in.beg);
+	in.seekg(0, std::istream::beg);
 	if (length != m.dims.rows * m.dims.cols * sizeof(float)) // size should match matrix dimensions * float
 	{
 		std::cerr << ERROR_MSG << INCOMPATIBLE_FILE_TO_MATRIX << std::endl;
@@ -338,12 +337,11 @@ std::istream &operator>>(std::istream &in, Matrix &m)
 	}
 	float tempNum = 0;
 	int i = 0;
-	while (in.read(reinterpret_cast<char *>(&tempNum), sizeof(float))) // todo open file in binary
+	while (in.read(reinterpret_cast<char *>(&tempNum), sizeof(float)))
 	{
 		m.matrix[i] = tempNum;
 		++i;
 	}
-	// todo see if this is a good way to read a file
 	if (in.eof())
 	{
 		return in;

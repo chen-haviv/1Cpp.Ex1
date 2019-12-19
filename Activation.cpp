@@ -1,6 +1,6 @@
 #include <istream>
 #include "Activation.h"
-#include <math.h>
+#include <cmath>
 
 
 Activation::Activation(ActivationType actType) : type(actType)
@@ -11,7 +11,6 @@ Activation::Activation(ActivationType actType) : type(actType)
  * receives a matrix and processes it using the relevant activation function on it.
  * @param matrix the matrix to process by the activation function.
  * @return the matrix after processing it according to the requirements
- * todo see if I need to free recources here - if I need to use matrix argument later on in the
  * programme
  */
 void Activation::operator()(Matrix &matrix) const
