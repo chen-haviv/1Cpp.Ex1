@@ -1,5 +1,0 @@
-class tmpmain{
-	int main(){
-
-	}
-};

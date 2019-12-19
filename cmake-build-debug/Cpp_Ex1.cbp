@@ -107,9 +107,6 @@
 		<Unit filename="/cygdrive/c/Users/Chend/CLionProjects/Cpp.Ex1/main.cpp">
 			<Option target="Cpp_Ex1"/>
 		</Unit>
-		<Unit filename="/cygdrive/c/Users/Chend/CLionProjects/Cpp.Ex1/tmpmain.cpp">
-			<Option target="Cpp_Ex1"/>
-		</Unit>
 		<Unit filename="/cygdrive/c/Users/Chend/CLionProjects/Cpp.Ex1/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>

@@ -258,33 +258,6 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles/Cpp_Ex1.dir/build.make CMakeFiles/Cpp_Ex1.dir/main.cpp.s
 .PHONY : main.cpp.s
 
-tmpmain.o: tmpmain.cpp.o
-
-.PHONY : tmpmain.o
-
-# target to build an object file
-tmpmain.cpp.o:
-	$(MAKE) -f CMakeFiles/Cpp_Ex1.dir/build.make CMakeFiles/Cpp_Ex1.dir/tmpmain.cpp.o
-.PHONY : tmpmain.cpp.o
-
-tmpmain.i: tmpmain.cpp.i
-
-.PHONY : tmpmain.i
-
-# target to preprocess a source file
-tmpmain.cpp.i:
-	$(MAKE) -f CMakeFiles/Cpp_Ex1.dir/build.make CMakeFiles/Cpp_Ex1.dir/tmpmain.cpp.i
-.PHONY : tmpmain.cpp.i
-
-tmpmain.s: tmpmain.cpp.s
-
-.PHONY : tmpmain.s
-
-# target to generate assembly for a file
-tmpmain.cpp.s:
-	$(MAKE) -f CMakeFiles/Cpp_Ex1.dir/build.make CMakeFiles/Cpp_Ex1.dir/tmpmain.cpp.s
-.PHONY : tmpmain.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -309,9 +282,6 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
-	@echo "... tmpmain.o"
-	@echo "... tmpmain.i"
-	@echo "... tmpmain.s"
 .PHONY : help
 
 

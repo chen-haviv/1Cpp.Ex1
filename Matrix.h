@@ -10,6 +10,7 @@
 #define IMG_PROCESSED_MSG "Image processed:"
 #define MLP_RESULT_MSG "Mlp result: "
 #define PROBABILITY_MSG " at probability: "
+#define BAD_COORDINATES_MSG "Impermissible attempt to acces matrix coordinates."
 /**
  * @struct MatrixDims
  * @brief Matrix dimensions container

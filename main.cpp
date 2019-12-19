@@ -2,7 +2,7 @@
 #include <iostream>
 
 #include "Matrix.h"
-#include "Activation.h"
+#include "activation.h"
 #include "Dense.h"
 #include "MlpNetwork.h"
 
