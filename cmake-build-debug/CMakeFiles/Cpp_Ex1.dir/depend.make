@@ -25,7 +25,6 @@ CMakeFiles/Cpp_Ex1.dir/main.cpp.o: ../Dense.h
 CMakeFiles/Cpp_Ex1.dir/main.cpp.o: ../Digit.h
 CMakeFiles/Cpp_Ex1.dir/main.cpp.o: ../Matrix.h
 CMakeFiles/Cpp_Ex1.dir/main.cpp.o: ../MlpNetwork.h
+CMakeFiles/Cpp_Ex1.dir/main.cpp.o: ../activation.h
 CMakeFiles/Cpp_Ex1.dir/main.cpp.o: ../main.cpp
-
-CMakeFiles/Cpp_Ex1.dir/tmpmain.cpp.o: ../tmpmain.cpp
 

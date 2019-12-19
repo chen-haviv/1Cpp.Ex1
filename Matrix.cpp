@@ -308,7 +308,6 @@ const float &Matrix::operator[](int i) const
  */
 std::ostream &operator<<(std::ostream &out, const Matrix &m)
 {
-	std::cout << IMG_PROCESSED_MSG << std::endl;
 	for (int i = 0; i < m.dims.rows; ++i)
 	{
 		for (int j = 0; j < m.dims.cols; ++j)
