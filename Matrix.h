@@ -22,9 +22,7 @@ typedef struct MatrixDims
 class Matrix
 {
 private:
-	void getMaxProbNumber(float &probability, int &maxPobabilityNumber) const;
-	int rows;
-	int cols;
+	MatrixDims dims;
 	float *matrix; // pointer to the single dimensional array which is our matrix
 
 

@@ -13,7 +13,7 @@
  * @param rows
  * @param cols
  */
-Matrix::Matrix(int rows, int cols) : rows(rows), cols(cols)
+Matrix::Matrix(int rows, int cols) : dims({rows, cols})
 {
 	matrix = new float[rows * cols];
 	for (int i = 0; i < rows * cols; i++)
@@ -36,10 +36,10 @@ Matrix::Matrix() : Matrix(1, 1)
  * matrix with exactly the same rows and cols.
  * @param m the matrix to copy coordinates from.
  */
-Matrix::Matrix(const Matrix &m) : Matrix(m.rows, m.cols)
+Matrix::Matrix(const Matrix &m) : Matrix(m.dims.rows, m.dims.cols)
 {
-	matrix = new float[rows * cols];
-	for (int i = 0; i < rows * cols; ++i)
+	matrix = new float[dims.rows * dims.cols];
+	for (int i = 0; i < dims.rows * dims.cols; ++i)
 	{
 		matrix[i] = m.matrix[i];
 	}
@@ -63,7 +63,7 @@ Matrix::~Matrix()
  */
 int Matrix::getRows() const
 {
-	return rows;
+	return dims.rows;
 }
 
 /**
@@ -72,7 +72,7 @@ int Matrix::getRows() const
  */
 int Matrix::getCols() const
 {
-	return cols;
+	return dims.cols;
 }
 
 /**
@@ -80,8 +80,8 @@ int Matrix::getCols() const
  */
 Matrix &Matrix::vectorize()
 {
-	rows = rows * cols;
-	cols = 1;
+	dims.rows = dims.rows * dims.cols;
+	dims.cols = 1;
 	return *this;
 }
 
@@ -91,12 +91,12 @@ Matrix &Matrix::vectorize()
  */
 void Matrix::plainPrint()
 {
-	for (int i = 0; i < rows; ++i)
+	for (int i = 0; i < dims.rows; ++i)
 	{
-		for (int j = 0; j < cols; ++j)
+		for (int j = 0; j < dims.cols; ++j)
 		{
-			std::cout << matrix[i * cols + j];
-			if (j != cols - 1)
+			std::cout << matrix[i * dims.cols + j];
+			if (j != dims.cols - 1)
 			{
 				std::cout << " "; // prints space between each coordinate
 			}
@@ -118,10 +118,10 @@ Matrix &Matrix::operator=(const Matrix &b)
 		return *this;
 	}
 	delete[] matrix;
-	rows = b.rows;
-	cols = b.cols;
-	matrix = new float[b.rows * b.cols];
-	for (int i = 0; i < rows * cols; ++i)
+	dims.rows = b.dims.rows;
+	dims.cols = b.dims.cols;
+	matrix = new float[b.dims.rows * b.dims.cols];
+	for (int i = 0; i < dims.rows * dims.cols; ++i)
 	{
 		matrix[i] = b.matrix[i];
 	}
@@ -135,24 +135,24 @@ Matrix &Matrix::operator=(const Matrix &b)
  */
 Matrix Matrix::operator*(Matrix const &b) const
 {
-	if (cols != b.rows)
+	if (dims.cols != b.dims.rows)
 	{
 		std::cerr << ERROR_MSG << ERROR_INCOMPATIBLE_MATRIX_MULTIPLICATION << std::endl;
 		exit(1);
 	}
 	else
 	{
-		Matrix result(rows, b.cols);
+		Matrix result(dims.rows, b.dims.cols);
 		float sum = 0;
-		for (int i = 0; i < rows; ++i)
+		for (int i = 0; i < dims.rows; ++i)
 		{
-			for (int j = 0; j < b.cols; ++j)
+			for (int j = 0; j < b.dims.cols; ++j)
 			{
-				for (int k = 0; k < cols; ++k)
+				for (int k = 0; k < dims.cols; ++k)
 				{
-					sum += matrix[i * cols + k] * b.matrix[k * b.cols + j];
+					sum += matrix[i * dims.cols + k] * b.matrix[k * b.dims.cols + j];
 				}
-				result[i*b.cols + j] = sum;
+				result[i*b.dims.cols + j] = sum;
 				sum = 0;
 			}
 		}
@@ -167,8 +167,8 @@ Matrix Matrix::operator*(Matrix const &b) const
  */
 Matrix Matrix::operator*(const float &c) const
 {
-	Matrix res(rows, cols);
-	for (int i = 0; i < rows * cols; ++i)
+	Matrix res(dims.rows, dims.cols);
+	for (int i = 0; i < dims.rows * dims.cols; ++i)
 	{
 		res.matrix[i] = matrix[i] * c;
 	}
@@ -184,8 +184,8 @@ Matrix Matrix::operator*(const float &c) const
  */
 Matrix operator*(const float &c, const Matrix &a)
 {
-	Matrix res(a.rows, a.cols);
-	for (int i = 0; i < a.rows * a.cols; ++i)
+	Matrix res(a.dims.rows, a.dims.cols);
+	for (int i = 0; i < a.dims.rows * a.dims.cols; ++i)
 	{
 		res.matrix[i] = a.matrix[i] * c;
 	}
@@ -199,7 +199,7 @@ Matrix operator*(const float &c, const Matrix &a)
  */
 Matrix Matrix::operator+(const Matrix &b) const
 {
-	if (rows != b.rows || cols != b.cols)
+	if (dims.rows != b.dims.rows || dims.cols != b.dims.cols)
 	{
 		std::cerr << ERROR_MSG << ADDITION_ERROR_MSG << std::endl;
 		exit(1);
@@ -207,8 +207,8 @@ Matrix Matrix::operator+(const Matrix &b) const
 	}
 	else
 	{
-		Matrix res(rows, cols);
-		for (int i = 0; i < rows * cols; ++i)
+		Matrix res(dims.rows, dims.cols);
+		for (int i = 0; i < dims.rows * dims.cols; ++i)
 		{
 			res.matrix[i] = matrix[i] + b.matrix[i];
 		}
@@ -225,14 +225,14 @@ Matrix Matrix::operator+(const Matrix &b) const
  */
 Matrix &Matrix::operator+=(const Matrix &b)
 {
-	if (rows != b.rows || cols != b.cols)
+	if (dims.rows != b.dims.rows || dims.cols != b.dims.cols)
 	{
 		std::cerr << ERROR_MSG << ADDITION_ERROR_MSG << std::endl;
 		exit(1);
 	}
 	else
 	{
-		for (int i = 0; i < rows * cols; ++i)
+		for (int i = 0; i < dims.rows * dims.cols; ++i)
 		{
 			matrix[i] += b.matrix[i];
 		}
@@ -248,7 +248,7 @@ Matrix &Matrix::operator+=(const Matrix &b)
  */
 float &Matrix::operator()(int i, int j)
 {
-	return matrix[i * cols + j];
+	return matrix[i * dims.cols + j];
 }
 
 
@@ -261,7 +261,7 @@ float &Matrix::operator()(int i, int j)
 const float &Matrix::operator()(int i, int j) const
 // consts?
 {
-	return matrix[i * cols + j];
+	return matrix[i * dims.cols + j];
 }
 
 
@@ -293,9 +293,9 @@ const float &Matrix::operator[](int i) const
 std::ostream &operator<<(std::ostream &out, const Matrix &m)
 {
 	std::cout << IMG_PROCESSED_MSG << std::endl;
-	for (int i = 0; i < m.rows; ++i)
+	for (int i = 0; i < m.dims.rows; ++i)
 	{
-		for (int j = 0; j < m.cols; ++j)
+		for (int j = 0; j < m.dims.cols; ++j)
 		{
 			if (m(i, j) <= 0.1)
 			{
@@ -330,7 +330,7 @@ std::istream &operator>>(std::istream &in, Matrix &m)
 	int length = in.tellg(); // goes to end of file to discover size, to ensure that compatible
 	// with the matrix into which we write from the file
 	in.seekg(0, in.beg);
-	if (length != m.rows * m.cols * sizeof(float)) // size should match matrix dimensions * float
+	if (length != m.dims.rows * m.dims.cols * sizeof(float)) // size should match matrix dimensions * float
 	{
 		std::cerr << ERROR_MSG << INCOMPATIBLE_FILE_TO_MATRIX << std::endl;
 		exit(1);
