@@ -1,6 +1,5 @@
-#include <istream>
-#include "Activation.h"
 #include <cmath>
+#include "Activation.h"
 
 
 Activation::Activation(ActivationType actType) : type(actType)
@@ -36,8 +35,8 @@ void Activation::softmaximize(Matrix &matrix)
 	float sum = 0;
 	for (int i = 0; i < matrix.getRows(); ++i)
 	{
-		sum += exp(matrix[i]);
-		matrix[i] = exp(matrix[i]);
+		sum += std::exp(matrix[i]);
+		matrix[i] = std::exp(matrix[i]);
 	}
 	matrix = matrix * (1 / sum);
 }
