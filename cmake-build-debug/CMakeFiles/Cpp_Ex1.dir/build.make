@@ -109,18 +109,18 @@ CMakeFiles/Cpp_Ex1.dir/Activation.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Cpp_Ex1.dir/Activation.cpp.s"
 	/usr/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cygdrive/c/Users/Chend/CLionProjects/Cpp.Ex1/Activation.cpp -o CMakeFiles/Cpp_Ex1.dir/Activation.cpp.s
 
-CMakeFiles/Cpp_Ex1.dir/DenseLayer.cpp.o: CMakeFiles/Cpp_Ex1.dir/flags.make
-CMakeFiles/Cpp_Ex1.dir/DenseLayer.cpp.o: ../DenseLayer.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/c/Users/Chend/CLionProjects/Cpp.Ex1/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Cpp_Ex1.dir/DenseLayer.cpp.o"
-	/usr/bin/c++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Cpp_Ex1.dir/DenseLayer.cpp.o -c /cygdrive/c/Users/Chend/CLionProjects/Cpp.Ex1/DenseLayer.cpp
+CMakeFiles/Cpp_Ex1.dir/Dense.cpp.o: CMakeFiles/Cpp_Ex1.dir/flags.make
+CMakeFiles/Cpp_Ex1.dir/Dense.cpp.o: ../Dense.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/c/Users/Chend/CLionProjects/Cpp.Ex1/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Cpp_Ex1.dir/Dense.cpp.o"
+	/usr/bin/c++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Cpp_Ex1.dir/Dense.cpp.o -c /cygdrive/c/Users/Chend/CLionProjects/Cpp.Ex1/Dense.cpp
 
-CMakeFiles/Cpp_Ex1.dir/DenseLayer.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Cpp_Ex1.dir/DenseLayer.cpp.i"
-	/usr/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cygdrive/c/Users/Chend/CLionProjects/Cpp.Ex1/DenseLayer.cpp > CMakeFiles/Cpp_Ex1.dir/DenseLayer.cpp.i
+CMakeFiles/Cpp_Ex1.dir/Dense.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Cpp_Ex1.dir/Dense.cpp.i"
+	/usr/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cygdrive/c/Users/Chend/CLionProjects/Cpp.Ex1/Dense.cpp > CMakeFiles/Cpp_Ex1.dir/Dense.cpp.i
 
-CMakeFiles/Cpp_Ex1.dir/DenseLayer.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Cpp_Ex1.dir/DenseLayer.cpp.s"
-	/usr/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cygdrive/c/Users/Chend/CLionProjects/Cpp.Ex1/DenseLayer.cpp -o CMakeFiles/Cpp_Ex1.dir/DenseLayer.cpp.s
+CMakeFiles/Cpp_Ex1.dir/Dense.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Cpp_Ex1.dir/Dense.cpp.s"
+	/usr/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cygdrive/c/Users/Chend/CLionProjects/Cpp.Ex1/Dense.cpp -o CMakeFiles/Cpp_Ex1.dir/Dense.cpp.s
 
 CMakeFiles/Cpp_Ex1.dir/MlpNetwork.cpp.o: CMakeFiles/Cpp_Ex1.dir/flags.make
 CMakeFiles/Cpp_Ex1.dir/MlpNetwork.cpp.o: ../MlpNetwork.cpp
@@ -141,7 +141,7 @@ Cpp_Ex1_OBJECTS = \
 "CMakeFiles/Cpp_Ex1.dir/tmpmain.cpp.o" \
 "CMakeFiles/Cpp_Ex1.dir/Matrix.cpp.o" \
 "CMakeFiles/Cpp_Ex1.dir/Activation.cpp.o" \
-"CMakeFiles/Cpp_Ex1.dir/DenseLayer.cpp.o" \
+"CMakeFiles/Cpp_Ex1.dir/Dense.cpp.o" \
 "CMakeFiles/Cpp_Ex1.dir/MlpNetwork.cpp.o"
 
 # External object files for target Cpp_Ex1
@@ -151,7 +151,7 @@ Cpp_Ex1.exe: CMakeFiles/Cpp_Ex1.dir/main.cpp.o
 Cpp_Ex1.exe: CMakeFiles/Cpp_Ex1.dir/tmpmain.cpp.o
 Cpp_Ex1.exe: CMakeFiles/Cpp_Ex1.dir/Matrix.cpp.o
 Cpp_Ex1.exe: CMakeFiles/Cpp_Ex1.dir/Activation.cpp.o
-Cpp_Ex1.exe: CMakeFiles/Cpp_Ex1.dir/DenseLayer.cpp.o
+Cpp_Ex1.exe: CMakeFiles/Cpp_Ex1.dir/Dense.cpp.o
 Cpp_Ex1.exe: CMakeFiles/Cpp_Ex1.dir/MlpNetwork.cpp.o
 Cpp_Ex1.exe: CMakeFiles/Cpp_Ex1.dir/build.make
 Cpp_Ex1.exe: CMakeFiles/Cpp_Ex1.dir/link.txt

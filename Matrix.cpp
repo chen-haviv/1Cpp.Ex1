@@ -1,5 +1,3 @@
-#include <iostream>
-#include <stdlib.h>
 #include "Matrix.h"
 
 #define ERROR_MSG "Error: "
@@ -7,6 +5,7 @@
 
 // Constructors:
 #define ASSIGNMENT_ERROR_MSG "Incompatible number of rows and columns in assignment"
+
 
 /**
  * non default constructor, creates a new matrix with rows rows and cols cols, initializes
@@ -55,7 +54,6 @@ Matrix::Matrix(const Matrix &m) : Matrix(m.rows, m.cols)
 Matrix::~Matrix()
 {
 	delete[] matrix;
-	delete this; // todo is this necessary?
 }
 
 // Methods:
@@ -63,7 +61,7 @@ Matrix::~Matrix()
  *
  * @return the rows of a given matrix
  */
-const int &Matrix::getRows() const
+int Matrix::getRows() const
 {
 	return rows;
 }
@@ -72,7 +70,7 @@ const int &Matrix::getRows() const
  *
  * @return the cols of a given matrix
  */
-const int &Matrix::getCols() const
+int Matrix::getCols() const
 {
 	return cols;
 }
@@ -97,7 +95,7 @@ void Matrix::plainPrint()
 	{
 		for (int j = 0; j < cols; ++j)
 		{
-			std::cout << matrix[i * rows + j];
+			std::cout << matrix[i * cols + j];
 			if (j != cols - 1)
 			{
 				std::cout << " "; // prints space between each coordinate
@@ -119,9 +117,9 @@ Matrix &Matrix::operator=(const Matrix &b)
 	{
 		return *this;
 	}
+	delete[] matrix;
 	rows = b.rows;
 	cols = b.cols;
-	delete[] matrix;
 	matrix = new float[b.rows * b.cols];
 	for (int i = 0; i < rows * cols; ++i)
 	{
@@ -135,7 +133,7 @@ Matrix &Matrix::operator=(const Matrix &b)
  * @param b the right hand side matrix.
  * @return the result of the multiplication.
  */
-Matrix Matrix::operator*(const Matrix &b) const
+Matrix Matrix::operator*(Matrix const &b) const
 {
 	if (cols != b.rows)
 	{
@@ -145,16 +143,20 @@ Matrix Matrix::operator*(const Matrix &b) const
 	else
 	{
 		Matrix result(rows, b.cols);
+		float sum = 0;
 		for (int i = 0; i < rows; ++i)
 		{
 			for (int j = 0; j < b.cols; ++j)
 			{
 				for (int k = 0; k < cols; ++k)
 				{
-					result[i * rows + j] += matrix[i * rows + k] + b.matrix[k * b.rows + j];
+					sum += matrix[i * cols + k] * b.matrix[k * b.cols + j];
 				}
+				result[i*b.cols + j] = sum;
+				sum = 0;
 			}
 		}
+		return result;
 	}
 }
 
@@ -206,12 +208,9 @@ Matrix Matrix::operator+(const Matrix &b) const
 	else
 	{
 		Matrix res(rows, cols);
-		for (int i = 0; i < rows; ++i)
+		for (int i = 0; i < rows * cols; ++i)
 		{
-			for (int j = 0; j < cols; ++j)
-			{
-				res.matrix[i * rows + j] = matrix[i * rows + j] + b.matrix[i * rows + j];
-			}
+			res.matrix[i] = matrix[i] + b.matrix[i];
 		}
 		return res;
 	}
@@ -233,12 +232,9 @@ Matrix &Matrix::operator+=(const Matrix &b)
 	}
 	else
 	{
-		for (int i = 0; i < rows; ++i)
+		for (int i = 0; i < rows * cols; ++i)
 		{
-			for (int j = 0; j < cols; ++j)
-			{
-				matrix[i * rows + j] += +b.matrix[i * rows + j];
-			}
+			matrix[i] += b.matrix[i];
 		}
 		return *this;
 	}
@@ -252,7 +248,7 @@ Matrix &Matrix::operator+=(const Matrix &b)
  */
 float &Matrix::operator()(int i, int j)
 {
-	return matrix[i * rows + j];
+	return matrix[i * cols + j];
 }
 
 
@@ -265,7 +261,7 @@ float &Matrix::operator()(int i, int j)
 const float &Matrix::operator()(int i, int j) const
 // consts?
 {
-	return matrix[i * rows + j];
+	return matrix[i * cols + j];
 }
 
 
@@ -286,6 +282,7 @@ const float &Matrix::operator[](int i) const
 {
 	return matrix[i];
 }
+
 
 /**
  *
@@ -311,8 +308,6 @@ std::ostream &operator<<(std::ostream &out, const Matrix &m)
 		}
 		std::cout << std::endl;
 	}
-	std::cout << std::endl;
-	std::cout << MLP_RESULT_MSG << res << PROBABILITY_MSG << prob << std::endl; // todo
 	return out;
 }
 
@@ -346,8 +341,13 @@ std::istream &operator>>(std::istream &in, Matrix &m)
 	while (in.read(reinterpret_cast<char *>(&tempNum), sizeof(float))) // todo open file in binary
 	{
 		m.matrix[i] = tempNum;
+		++i;
 	}
 	// todo see if this is a good way to read a file
+	if (in.eof())
+	{
+		return in;
+	}
 	if (in.bad() || in.fail()) // if input file contains non float data
 	{
 		std::cerr << ERROR_MSG << INVALID_INPUT << std::endl;

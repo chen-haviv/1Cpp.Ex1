@@ -86,10 +86,10 @@
 		<Unit filename="/cygdrive/c/Users/Chend/CLionProjects/Cpp.Ex1/Activation.h">
 			<Option target="Cpp_Ex1"/>
 		</Unit>
-		<Unit filename="/cygdrive/c/Users/Chend/CLionProjects/Cpp.Ex1/DenseLayer.cpp">
+		<Unit filename="/cygdrive/c/Users/Chend/CLionProjects/Cpp.Ex1/Dense.cpp">
 			<Option target="Cpp_Ex1"/>
 		</Unit>
-		<Unit filename="/cygdrive/c/Users/Chend/CLionProjects/Cpp.Ex1/DenseLayer.h">
+		<Unit filename="/cygdrive/c/Users/Chend/CLionProjects/Cpp.Ex1/Dense.h">
 			<Option target="Cpp_Ex1"/>
 		</Unit>
 		<Unit filename="/cygdrive/c/Users/Chend/CLionProjects/Cpp.Ex1/Matrix.cpp">

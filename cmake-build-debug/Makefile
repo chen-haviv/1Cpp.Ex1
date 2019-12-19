@@ -150,32 +150,32 @@ Activation.cpp.s:
 	$(MAKE) -f CMakeFiles/Cpp_Ex1.dir/build.make CMakeFiles/Cpp_Ex1.dir/Activation.cpp.s
 .PHONY : Activation.cpp.s
 
-DenseLayer.o: DenseLayer.cpp.o
+Dense.o: Dense.cpp.o
 
-.PHONY : DenseLayer.o
+.PHONY : Dense.o
 
 # target to build an object file
-DenseLayer.cpp.o:
-	$(MAKE) -f CMakeFiles/Cpp_Ex1.dir/build.make CMakeFiles/Cpp_Ex1.dir/DenseLayer.cpp.o
-.PHONY : DenseLayer.cpp.o
+Dense.cpp.o:
+	$(MAKE) -f CMakeFiles/Cpp_Ex1.dir/build.make CMakeFiles/Cpp_Ex1.dir/Dense.cpp.o
+.PHONY : Dense.cpp.o
 
-DenseLayer.i: DenseLayer.cpp.i
+Dense.i: Dense.cpp.i
 
-.PHONY : DenseLayer.i
+.PHONY : Dense.i
 
 # target to preprocess a source file
-DenseLayer.cpp.i:
-	$(MAKE) -f CMakeFiles/Cpp_Ex1.dir/build.make CMakeFiles/Cpp_Ex1.dir/DenseLayer.cpp.i
-.PHONY : DenseLayer.cpp.i
+Dense.cpp.i:
+	$(MAKE) -f CMakeFiles/Cpp_Ex1.dir/build.make CMakeFiles/Cpp_Ex1.dir/Dense.cpp.i
+.PHONY : Dense.cpp.i
 
-DenseLayer.s: DenseLayer.cpp.s
+Dense.s: Dense.cpp.s
 
-.PHONY : DenseLayer.s
+.PHONY : Dense.s
 
 # target to generate assembly for a file
-DenseLayer.cpp.s:
-	$(MAKE) -f CMakeFiles/Cpp_Ex1.dir/build.make CMakeFiles/Cpp_Ex1.dir/DenseLayer.cpp.s
-.PHONY : DenseLayer.cpp.s
+Dense.cpp.s:
+	$(MAKE) -f CMakeFiles/Cpp_Ex1.dir/build.make CMakeFiles/Cpp_Ex1.dir/Dense.cpp.s
+.PHONY : Dense.cpp.s
 
 Matrix.o: Matrix.cpp.o
 
@@ -297,9 +297,9 @@ help:
 	@echo "... Activation.o"
 	@echo "... Activation.i"
 	@echo "... Activation.s"
-	@echo "... DenseLayer.o"
-	@echo "... DenseLayer.i"
-	@echo "... DenseLayer.s"
+	@echo "... Dense.o"
+	@echo "... Dense.i"
+	@echo "... Dense.s"
 	@echo "... Matrix.o"
 	@echo "... Matrix.i"
 	@echo "... Matrix.s"

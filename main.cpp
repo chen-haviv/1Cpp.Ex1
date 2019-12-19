@@ -1,4 +1,5 @@
 #include <fstream>
+#include <iostream>
 
 #include "Matrix.h"
 #include "Activation.h"

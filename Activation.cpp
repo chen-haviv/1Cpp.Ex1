@@ -14,16 +14,15 @@ Activation::Activation(ActivationType actType) : type(actType)
  * todo see if I need to free recources here - if I need to use matrix argument later on in the
  * programme
  */
-Matrix Activation::operator()(const Matrix &matrix) const
+void Activation::operator()(Matrix &matrix) const
 {
-	Matrix postActivation(matrix.getRows(), matrix.getCols());
 	if (type == Relu)
 	{
-		return rectify(matrix, postActivation);
+		rectify(matrix);
 	}
 	else if (type == Softmax) // Softmax can only work on vectors.
 	{
-		return softmaximize(matrix, postActivation);
+		softmaximize(matrix);
 	}
 }
 
@@ -33,16 +32,15 @@ Matrix Activation::operator()(const Matrix &matrix) const
  * @param postActivation
  * @return postActivation after processing
  */
-Matrix Activation::softmaximize(const Matrix &matrix, Matrix &postActivation)
+void Activation::softmaximize(Matrix &matrix)
 {
 	float sum = 0;
 	for (int i = 0; i < matrix.getRows(); ++i)
 	{
 		sum += exp(matrix[i]);
-		postActivation[i] = exp(matrix[i]);
+		matrix[i] = exp(matrix[i]);
 	}
-	postActivation = postActivation * (1 / sum);
-	return postActivation;
+	matrix = matrix * (1 / sum);
 }
 /**
  * processes the matrix and returns it after activating ReLU function as described in the PDF.
@@ -50,20 +48,17 @@ Matrix Activation::softmaximize(const Matrix &matrix, Matrix &postActivation)
  * @param postActivation
  * @return postActivation after processing
  */
-Matrix Activation::rectify(const Matrix &matrix, Matrix &postActivation)
+void Activation::rectify(Matrix &matrix)
 {
 	for (int i = 0; i < matrix.getCols() * matrix.getRows(); ++i)
 	{
 		if (matrix[i] < 0)
 		{
-			postActivation[i] = 0;
+			matrix[i] = 0;
+
 		}
-		else
-		{
-			postActivation[i] = matrix[i];
-		}
+
 	}
-	return postActivation;
 }
 /**
  * getter - sreturns this type's activation type
@@ -73,3 +68,4 @@ const ActivationType &Activation::getActivationType()
 {
 	return type;
 }
+

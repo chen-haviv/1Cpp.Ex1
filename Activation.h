@@ -1,6 +1,7 @@
 //Activation.h
 #ifndef ACTIVATION_H
 #define ACTIVATION_H
+
 #include "Matrix.h"
 
 
@@ -10,26 +11,26 @@
  */
 enum ActivationType
 {
-    Relu,
-    Softmax
+	Relu,
+	Softmax
 };
 
-class Activation{
+class Activation
+{
 private:
 	ActivationType type;
-	static Matrix rectify(const Matrix &matrix, Matrix &postActivation) ;
-	static Matrix softmaximize(const Matrix &matrix, Matrix &postActivation) ;
 
-	~Activation();
+	static void rectify(Matrix &matrix);
+
+	static void softmaximize(Matrix &matrix);
+
 
 public:
-	explicit Activation (ActivationType actType);
+	explicit Activation(ActivationType actType);
 
-	const ActivationType& getActivationType();
+	const ActivationType &getActivationType();
 
-	Matrix operator()(const Matrix &m) const;
-
-
+	void operator()(Matrix &m) const;
 
 
 };

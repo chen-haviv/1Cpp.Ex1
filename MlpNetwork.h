@@ -4,6 +4,7 @@
 #define MLPNETWORK_H
 
 #include "Matrix.h"
+#include "Digit.h"
 #include <istream>
 #define MLP_SIZE 4
 
@@ -13,13 +14,13 @@ const MatrixDims biasDims[]    = {{128, 1}, {64, 1}, {20, 1},  {10, 1}};
 
 class MlpNetwork{
 private:
-	Matrix weightArray;
-	Matrix biasArray;
+	Matrix* weightArray;
+	Matrix* biasArray;
 
 public:
 	MlpNetwork(Matrix wArray[4], Matrix bArray[4]);
 
-	int operator()(std::istream &istream);
+	Digit operator()(Matrix& m);
 };
 
 

@@ -9,10 +9,10 @@
 #include "Activation.h"
 
 
-class DenseLayer
+class Dense
 {
 public:
-	DenseLayer(const Matrix &w, const Matrix &bias, ActivationType activation);
+	Dense(const Matrix &w, const Matrix &bias, ActivationType activation);
 
 	const Matrix& getWeights() const;
 
@@ -23,9 +23,7 @@ public:
 		return activation.getActivationType(); // short function, inlined
 	}
 
-	~DenseLayer();
-
-	Matrix operator()(Matrix& matrix) const;
+	void operator()(Matrix& matrix) const;
 
 
 
