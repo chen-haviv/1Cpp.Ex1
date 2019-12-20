@@ -20,9 +20,9 @@ class Activation
 private:
 	ActivationType type;
 
-	static void rectify(Matrix &matrix);
+	static Matrix rectify(const Matrix &matrix);
 
-	static void softmaximize(Matrix &matrix);
+	static Matrix softmaximize(const Matrix &matrix);
 
 
 public:
@@ -30,7 +30,7 @@ public:
 
 	const ActivationType &getActivationType();
 
-	void operator()(Matrix &m) const;
+	Matrix operator()(const Matrix &m) const;
 
 
 };

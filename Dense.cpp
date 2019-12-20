@@ -23,7 +23,6 @@ Matrix Dense::operator()(const Matrix &matrix) const
 	Matrix tmp = matrix;
 	tmp = weights * matrix;
 	tmp += bias;
-	activation(tmp);
-	return tmp;
+	return activation(tmp);
 }
 
