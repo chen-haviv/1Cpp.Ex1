@@ -20,7 +20,7 @@ private:
 public:
 	MlpNetwork(Matrix wArray[4], Matrix bArray[4]);
 
-	Digit operator()(Matrix& m);
+	Digit operator()(const Matrix& m);
 };
 
 

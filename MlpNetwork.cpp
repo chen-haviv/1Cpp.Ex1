@@ -31,27 +31,21 @@ Digit getMaxProbNumber(const Matrix &m, float &probability, int &maxPobabilityNu
 	}
 	return {(unsigned int) maxPobabilityNumber, probability};
 }
-
-Digit MlpNetwork::operator()(Matrix &m)
+/**
+ * activates all of the layers on param m and returns a Digit struct with the probability and the
+ * most probable number assessed by the neural network from the analyzed picture.
+ * @param m the picture to analyze
+ * @return Digit holding the most probable number and it's probability.
+ */
+Digit MlpNetwork::operator()(const Matrix &m)
 {
-	//first layer
 	Dense first(weightArray[0], biasArray[0], Relu);
-	first(m);
-	//second layer
-
 	Dense second(weightArray[1], biasArray[1], Relu);
-	second(m);
-	//third layer
-
 	Dense third(weightArray[2], biasArray[2], Relu);
-	third(m);
-	//fourth layer
-
 	Dense fourth(weightArray[3], biasArray[3], Softmax);
-	fourth(m);
 	float prob;
 	int number;
-	Digit d = getMaxProbNumber(m, prob, number);
+	Digit d = getMaxProbNumber(fourth(third(second(first(m)))), prob, number);
 
 	return d;
 }

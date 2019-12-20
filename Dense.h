@@ -23,7 +23,7 @@ public:
 		return activation.getActivationType(); // short function, inlined
 	}
 
-	void operator()(Matrix& matrix) const;
+	Matrix operator()(const Matrix& matrix) const;
 
 
 

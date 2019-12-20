@@ -18,10 +18,12 @@ const Matrix &Dense::getBias() const
 	return bias;
 }
 
-void Dense::operator()(Matrix &matrix) const
+Matrix Dense::operator()(const Matrix &matrix) const
 {
-	matrix = weights * matrix;
-	matrix += bias;
-	activation(matrix);
+	Matrix tmp = matrix;
+	tmp = weights * matrix;
+	tmp += bias;
+	activation(tmp);
+	return tmp;
 }
 
