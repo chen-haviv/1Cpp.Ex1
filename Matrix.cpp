@@ -17,13 +17,13 @@ Matrix::Matrix(int rows, int cols) : dims({rows, cols})
 {
 	if (rows <= 0 || cols <= 0)
 	{
-		std::cerr << ERROR_MSG << INVALID_MATRIX_CREATION;
+		std::cerr << ERROR_MSG << INVALID_MATRIX_CREATION << std::endl;
 		exit(1);
 	}
 	matrix = new float[rows * cols];
 	if (matrix == nullptr)
 	{
-		std::cerr << ERROR_MSG << FAILED_ALLOC;
+		std::cerr << ERROR_MSG << FAILED_ALLOC << std::endl;
 		exit(1);
 	}
 	else
