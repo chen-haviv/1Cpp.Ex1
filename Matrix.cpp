@@ -26,9 +26,12 @@ Matrix::Matrix(int rows, int cols) : dims({rows, cols})
 		std::cerr << ERROR_MSG << FAILED_ALLOC;
 		exit(1);
 	}
-	for (int i = 0; i < rows * cols; i++)
+	else
 	{
-		matrix[i] = 0;
+		for (int i = 0; i < rows * cols; i++)
+		{
+			matrix[i] = 0;
+		}
 	}
 }
 
@@ -46,7 +49,8 @@ Matrix::Matrix() : Matrix(1, 1)
  * matrix with exactly the same rows and cols.
  * @param m the matrix to copy coordinates from.
  */
-Matrix::Matrix(const Matrix &m) : Matrix(m.dims.rows, m.dims.cols)
+Matrix::Matrix(
+		const Matrix &m) : Matrix(m.dims.rows, m.dims.cols)
 {
 	matrix = new float[dims.rows * dims.cols];
 	for (int i = 0; i < dims.rows * dims.cols; ++i)
@@ -360,7 +364,8 @@ std::istream &operator>>(std::istream &in, Matrix &m)
 	// with the matrix into which we write from the file
 	in.seekg(0, std::istream::beg);
 	if (length !=
-		m.dims.rows * m.dims.cols * sizeof(float)) // size should match matrix dimensions * float
+		m.dims.rows * m.dims.cols *
+		sizeof(float)) // size should match matrix dimensions * float
 	{
 		std::cerr << ERROR_MSG << INCOMPATIBLE_FILE_TO_MATRIX << std::endl;
 		exit(1);

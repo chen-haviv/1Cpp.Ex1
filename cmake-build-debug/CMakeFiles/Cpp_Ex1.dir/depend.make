@@ -15,16 +15,8 @@ CMakeFiles/Cpp_Ex1.dir/Matrix.cpp.o: ../Matrix.h
 
 CMakeFiles/Cpp_Ex1.dir/MlpNetwork.cpp.o: ../Activation.h
 CMakeFiles/Cpp_Ex1.dir/MlpNetwork.cpp.o: ../Dense.h
-CMakeFiles/Cpp_Ex1.dir/MlpNetwork.cpp.o: ../Digit.h
 CMakeFiles/Cpp_Ex1.dir/MlpNetwork.cpp.o: ../Matrix.h
 CMakeFiles/Cpp_Ex1.dir/MlpNetwork.cpp.o: ../MlpNetwork.cpp
 CMakeFiles/Cpp_Ex1.dir/MlpNetwork.cpp.o: ../MlpNetwork.h
 
-CMakeFiles/Cpp_Ex1.dir/main.cpp.o: ../Activation.h
-CMakeFiles/Cpp_Ex1.dir/main.cpp.o: ../Dense.h
-CMakeFiles/Cpp_Ex1.dir/main.cpp.o: ../Digit.h
-CMakeFiles/Cpp_Ex1.dir/main.cpp.o: ../Matrix.h
-CMakeFiles/Cpp_Ex1.dir/main.cpp.o: ../MlpNetwork.h
-CMakeFiles/Cpp_Ex1.dir/main.cpp.o: ../activation.h
-CMakeFiles/Cpp_Ex1.dir/main.cpp.o: ../main.cpp
 
