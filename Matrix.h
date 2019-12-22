@@ -7,10 +7,11 @@
 #define INCOMPATIBLE_FILE_TO_MATRIX "Number of numbers read does not match expected matrix size."
 #define INVALID_INPUT "Invalid input from input file."
 #define ERROR_INCOMPATIBLE_MATRIX_MULTIPLICATION "Incompatible matrices in multiplication attempt."
-#define IMG_PROCESSED_MSG "Image processed:"
-#define MLP_RESULT_MSG "Mlp result: "
-#define PROBABILITY_MSG " at probability: "
+#define ERROR_MSG "Error: "
 #define BAD_COORDINATES_MSG "Impermissible attempt to acces matrix coordinates."
+#define INVALID_MATRIX_CREATION "Invalid attempt at creating a matrix with impermissible rows or"\
+                           " columns; A matrix can only have positive integers rows and columns."
+#define FAILED_ALLOC "Unsuccessful allocation attempt."
 /**
  * @struct MatrixDims
  * @brief Matrix dimensions container

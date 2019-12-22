@@ -2,6 +2,10 @@
 #ifndef ACTIVATION_H
 #define ACTIVATION_H
 
+#define BAD_ACTIVATION_MSG "Unsupported activation type."
+
+#define ERROR_MSG "Error: "
+
 #include "Matrix.h"
 
 

@@ -22,6 +22,10 @@ Matrix Activation::operator()(const Matrix &matrix) const
 	{
 		return softmaximize(matrix);
 	}
+	else {
+		std::cerr << ERROR_MSG << BAD_ACTIVATION_MSG;
+		exit(1);
+	}
 }
 
 /**

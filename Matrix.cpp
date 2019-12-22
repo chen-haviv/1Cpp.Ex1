@@ -1,6 +1,6 @@
 #include "Matrix.h"
 
-#define ERROR_MSG "Error: "
+
 
 
 // Constructors:
@@ -15,7 +15,17 @@
  */
 Matrix::Matrix(int rows, int cols) : dims({rows, cols})
 {
+	if (rows <= 0 || cols <= 0)
+	{
+		std::cerr << ERROR_MSG << INVALID_MATRIX_CREATION;
+		exit(1);
+	}
 	matrix = new float[rows * cols];
+	if (matrix == nullptr)
+	{
+		std::cerr << ERROR_MSG << FAILED_ALLOC;
+		exit(1);
+	}
 	for (int i = 0; i < rows * cols; i++)
 	{
 		matrix[i] = 0;
@@ -54,6 +64,7 @@ Matrix::Matrix(const Matrix &m) : Matrix(m.dims.rows, m.dims.cols)
 Matrix::~Matrix()
 {
 	delete[] matrix;
+	matrix = nullptr;
 }
 
 // Methods:
@@ -152,7 +163,7 @@ Matrix Matrix::operator*(Matrix const &b) const
 				{
 					sum += matrix[i * dims.cols + k] * b.matrix[k * b.dims.cols + j];
 				}
-				result[i*b.dims.cols + j] = sum;
+				result[i * b.dims.cols + j] = sum;
 				sum = 0;
 			}
 		}
@@ -248,7 +259,8 @@ Matrix &Matrix::operator+=(const Matrix &b)
  */
 float &Matrix::operator()(int i, int j)
 {
-	if (i > dims.rows || j > dims.cols || i < 0 || j < 0) {
+	if (i > dims.rows || j > dims.cols || i < 0 || j < 0)
+	{
 		std::cout << ERROR_MSG << BAD_COORDINATES_MSG;
 		exit(1);
 	}
@@ -265,7 +277,8 @@ float &Matrix::operator()(int i, int j)
 const float &Matrix::operator()(int i, int j) const
 // consts?
 {
-	if (i > dims.rows || j > dims.cols|| i < 0 || j < 0) {
+	if (i > dims.rows || j > dims.cols || i < 0 || j < 0)
+	{
 		std::cout << ERROR_MSG << BAD_COORDINATES_MSG;
 		exit(1);
 	}
@@ -279,7 +292,8 @@ const float &Matrix::operator()(int i, int j) const
  */
 float &Matrix::operator[](int i)
 {
-	if (i > dims.rows*dims.cols|| i < 0) {
+	if (i > dims.rows * dims.cols || i < 0)
+	{
 		std::cout << ERROR_MSG << BAD_COORDINATES_MSG;
 		exit(1);
 	}
@@ -292,7 +306,8 @@ float &Matrix::operator[](int i)
  */
 const float &Matrix::operator[](int i) const
 {
-	if (i > dims.rows*dims.cols|| i < 0) {
+	if (i > dims.rows * dims.cols || i < 0)
+	{
 		std::cout << ERROR_MSG << BAD_COORDINATES_MSG;
 		exit(1);
 	}
@@ -314,14 +329,14 @@ std::ostream &operator<<(std::ostream &out, const Matrix &m)
 		{
 			if (m(i, j) <= 0.1)
 			{
-				std::cout << "  ";
+				out << "  ";
 			}
 			else
 			{
-				std::cout << "**";
+				out << "**";
 			}
 		}
-		std::cout << std::endl;
+		out << std::endl;
 	}
 	return out;
 }
@@ -344,7 +359,8 @@ std::istream &operator>>(std::istream &in, Matrix &m)
 	int length = in.tellg(); // goes to end of file to discover size, to ensure that compatible
 	// with the matrix into which we write from the file
 	in.seekg(0, std::istream::beg);
-	if (length != m.dims.rows * m.dims.cols * sizeof(float)) // size should match matrix dimensions * float
+	if (length !=
+		m.dims.rows * m.dims.cols * sizeof(float)) // size should match matrix dimensions * float
 	{
 		std::cerr << ERROR_MSG << INCOMPATIBLE_FILE_TO_MATRIX << std::endl;
 		exit(1);
