@@ -42,7 +42,7 @@ public:
 	// Destructor:
 	~Matrix();
 
-	// Methods:
+    // Methods:
 	int getRows() const;
 
 	int getCols() const;
