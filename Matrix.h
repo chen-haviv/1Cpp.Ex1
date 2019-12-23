@@ -9,9 +9,11 @@
 #define ERROR_INCOMPATIBLE_MATRIX_MULTIPLICATION "Incompatible matrices in multiplication attempt."
 #define ERROR_MSG "Error: "
 #define BAD_COORDINATES_MSG "Impermissible attempt to acces matrix coordinates."
-#define INVALID_MATRIX_CREATION "Invalid attempt at creating a matrix with impermissible rows or"\
-                           " columns; A matrix can only have positive integers rows and columns."
+#define INVALID_MATRIX_CREATION "Invalid attempt at creating a matrix: impermissible row size or"\
+                           " columns size; A matrix can only have positive integers rows and "\
+                           "columns."
 #define FAILED_ALLOC "Unsuccessful allocation attempt."
+
 /**
  * @struct MatrixDims
  * @brief Matrix dimensions container
@@ -64,11 +66,11 @@ public:
 
 	float &operator()(int i, int j);
 
-	const float& operator()(int i, int j) const;
+	const float &operator()(int i, int j) const;
 
 	float &operator[](int i);
 
-	const float& operator[] (int i) const;
+	const float &operator[](int i) const;
 
 	friend std::ostream &operator<<(std::ostream &out, const Matrix &m);
 

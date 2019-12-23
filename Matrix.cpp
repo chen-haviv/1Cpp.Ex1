@@ -4,8 +4,6 @@
 
 
 // Constructors:
-#define ASSIGNMENT_ERROR_MSG "Incompatible number of rows and columns in assignment"
-
 
 /**
  * non default constructor, creates a new matrix with rows rows and cols cols, initializes
@@ -363,9 +361,8 @@ std::istream &operator>>(std::istream &in, Matrix &m)
 	int length = in.tellg(); // goes to end of file to discover size, to ensure that compatible
 	// with the matrix into which we write from the file
 	in.seekg(0, std::istream::beg);
-	if (length !=
-		m.dims.rows * m.dims.cols *
-		sizeof(float)) // size should match matrix dimensions * float
+	if (length != m.dims.rows * m.dims.cols * sizeof(float)) // size should match matrix
+		// dimensions * float
 	{
 		std::cerr << ERROR_MSG << INCOMPATIBLE_FILE_TO_MATRIX << std::endl;
 		exit(1);
