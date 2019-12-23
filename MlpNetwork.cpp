@@ -5,6 +5,11 @@
 #include "MlpNetwork.h"
 #include "Dense.h"
 
+/**
+ * constructs mlpNetwork with the given array pointers
+ * @param wArray
+ * @param bArray
+ */
 MlpNetwork::MlpNetwork(Matrix *wArray, Matrix *bArray) :
 		weightArray(wArray), biasArray(bArray)
 {}
@@ -17,7 +22,7 @@ MlpNetwork::MlpNetwork(Matrix *wArray, Matrix *bArray) :
  * @param probability the maximal robability
  * @param maxPobabilityNumber the number which has maximal probability for the inputted image
  */
-Digit getMaxProbNumber(const Matrix &m, float &probability, int &maxPobabilityNumber)
+Digit MlpNetwork::_getMaxProbNumber(const Matrix &m, float &probability, int &maxPobabilityNumber)
 {
 	probability = 0;
 	maxPobabilityNumber = 0;

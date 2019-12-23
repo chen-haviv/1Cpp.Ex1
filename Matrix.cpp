@@ -38,7 +38,6 @@ Matrix::Matrix(int rows, int cols) : dims({rows, cols})
  */
 Matrix::Matrix() : Matrix(1, 1)
 {
-	matrix = new float[1];
 	matrix[0] = 0;
 }
 
@@ -49,7 +48,6 @@ Matrix::Matrix() : Matrix(1, 1)
  */
 Matrix::Matrix(const Matrix &m) : Matrix(m.dims.rows, m.dims.cols)
 {
-	matrix = new float[dims.rows * dims.cols];
 	for (int i = 0; i < dims.rows * dims.cols; ++i)
 	{
 		matrix[i] = m.matrix[i];
@@ -326,7 +324,7 @@ std::ostream &operator<<(std::ostream &out, const Matrix &m)
 	{
 		for (int j = 0; j < m.dims.cols; ++j)
 		{
-			if (m(i, j) <= 0.1)
+			if (m(i, j) <= 0.1f)
 			{
 				out << "  ";
 			}

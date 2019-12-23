@@ -1,7 +1,10 @@
 #include <cmath>
 #include "Activation.h"
 
-
+/**
+ * constructs an activation object with actType as activation
+ * @param actType
+ */
 Activation::Activation(ActivationType actType) : type(actType)
 {}
 
@@ -16,11 +19,11 @@ Matrix Activation::operator()(const Matrix &matrix) const
 {
 	if (type == Relu)
 	{
-		return rectify(matrix);
+		return _rectify(matrix);
 	}
 	else // Softmax can only work on vectors.
 	{
-		return softmaximize(matrix);
+		return _softmaximize(matrix);
 	}
 }
 
@@ -30,7 +33,7 @@ Matrix Activation::operator()(const Matrix &matrix) const
  * @param postActivation
  * @return postActivation after processing
  */
-Matrix Activation::softmaximize(const Matrix &matrix)
+Matrix Activation::_softmaximize(const Matrix &matrix)
 {
 	Matrix tmp(matrix.getRows(), matrix.getCols());
 	float sum = 0;
@@ -49,7 +52,7 @@ Matrix Activation::softmaximize(const Matrix &matrix)
  * @param postActivation
  * @return postActivation after processing
  */
-Matrix Activation::rectify(const Matrix &matrix)
+Matrix Activation::_rectify(const Matrix &matrix)
 {
 	Matrix tmp(matrix.getRows(), matrix.getCols());
 	for (int i = 0; i < matrix.getCols() * matrix.getRows(); ++i)
