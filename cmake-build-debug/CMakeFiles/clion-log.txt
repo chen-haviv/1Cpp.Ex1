@@ -1,4 +1,6 @@
-C:\Users\Chend\.CLion2019.3\system\cygwin_cmake\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /cygdrive/c/Users/Chend/CLionProjects/Cpp.Ex1
--- Configuring done
--- Generating done
--- Build files have been written to: /cygdrive/c/Users/Chend/CLionProjects/Cpp.Ex1/cmake-build-debug
+/usr/local/jetbrains/clion/2019.2.1/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /cs/usr/chen.haviv/CLionProjects/1Cpp.Ex1
+CMake Error at CMakeLists.txt:1 (cmake_minimum_required):
+  CMake 3.15 or higher is required.  You are running version 3.14.5
+
+
+-- Configuring incomplete, errors occurred!

@@ -49,7 +49,7 @@ public:
 
 	Matrix &vectorize();
 
-	void plainPrint();
+	void plainPrint() const;
 
 	//Operators:
 	Matrix &operator=(const Matrix &b);

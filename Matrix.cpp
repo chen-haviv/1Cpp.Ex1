@@ -102,17 +102,15 @@ Matrix &Matrix::vectorize()
  * Prints matrix elements, no return value. prints space after each element (incl. last element in
  * the row) prints newline after each row (incl. last row)
  */
-void Matrix::plainPrint()
+void Matrix::plainPrint() const
 {
 	for (int i = 0; i < dims.rows; ++i)
 	{
 		for (int j = 0; j < dims.cols; ++j)
 		{
 			std::cout << matrix[i * dims.cols + j];
-			if (j != dims.cols - 1)
-			{
-				std::cout << " "; // prints space between each coordinate
-			}
+            std::cout << " "; // prints space between each coordinate
+
 		}
 		std::cout << std::endl; // prints endl after end of each row
 	}
@@ -263,7 +261,7 @@ float &Matrix::operator()(int i, int j)
 {
 	if (i > dims.rows || j > dims.cols || i < 0 || j < 0)
 	{
-		std::cout << ERROR_MSG << BAD_COORDINATES_MSG;
+		std::cerr << ERROR_MSG << BAD_COORDINATES_MSG;
 		exit(1);
 	}
 	return matrix[i * dims.cols + j];
@@ -281,7 +279,7 @@ const float &Matrix::operator()(int i, int j) const
 {
 	if (i > dims.rows || j > dims.cols || i < 0 || j < 0)
 	{
-		std::cout << ERROR_MSG << BAD_COORDINATES_MSG;
+		std::cerr << ERROR_MSG << BAD_COORDINATES_MSG;
 		exit(1);
 	}
 	return matrix[i * dims.cols + j];
@@ -296,7 +294,7 @@ float &Matrix::operator[](int i)
 {
 	if (i > dims.rows * dims.cols || i < 0)
 	{
-		std::cout << ERROR_MSG << BAD_COORDINATES_MSG;
+		std::cerr << ERROR_MSG << BAD_COORDINATES_MSG;
 		exit(1);
 	}
 	return matrix[i];
@@ -310,7 +308,7 @@ const float &Matrix::operator[](int i) const
 {
 	if (i > dims.rows * dims.cols || i < 0)
 	{
-		std::cout << ERROR_MSG << BAD_COORDINATES_MSG;
+		std::cerr << ERROR_MSG << BAD_COORDINATES_MSG;
 		exit(1);
 	}
 	return matrix[i];
@@ -329,7 +327,7 @@ std::ostream &operator<<(std::ostream &out, const Matrix &m)
 	{
 		for (int j = 0; j < m.dims.cols; ++j)
 		{
-			if (m(i, j) <= 0.1)
+			if (m(i, j) < 0.1)
 			{
 				out << "  ";
 			}
@@ -361,7 +359,7 @@ std::istream &operator>>(std::istream &in, Matrix &m)
 	int length = in.tellg(); // goes to end of file to discover size, to ensure that compatible
 	// with the matrix into which we write from the file
 	in.seekg(0, std::istream::beg);
-	if (length != m.dims.rows * m.dims.cols * sizeof(float)) // size should match matrix
+	if ((unsigned int) length != m.dims.rows * m.dims.cols * sizeof(float)) // size should match matrix
 		// dimensions * float
 	{
 		std::cerr << ERROR_MSG << INCOMPATIBLE_FILE_TO_MATRIX << std::endl;

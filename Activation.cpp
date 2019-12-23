@@ -18,7 +18,7 @@ Matrix Activation::operator()(const Matrix &matrix) const
 	{
 		return rectify(matrix);
 	}
-	else if (type == Softmax) // Softmax can only work on vectors.
+	else // Softmax can only work on vectors.
 	{
 		return softmaximize(matrix);
 	}
